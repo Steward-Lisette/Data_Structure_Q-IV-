@@ -1,0 +1,171 @@
+DATA STRUCTURES GROUP WORK Q(IV)
+
+JUMA BOAZ       EDS/B/01-04252/2024
+STEWARD OUMA    SIT/B/01-58125/2024
+SOPHIA EKAKORO  SIT/B/01-58128/2024
+BARASA RICHARD  SIT/B/01-58162/2024
+
+Using link list with an example of yoir choice show all operations of a binary tree.
+" Write a small program"
+
+A Java program that implements a Binary Tree using Linked List.
+Includes all essential operations:
+
+1. Insertion
+
+2. Search
+
+3. Deletion
+
+4. Preorder Traversal
+
+5. Inorder Traversal
+
+6. Postorder Traversal
+
+Tree Structure Example
+After inserting 50, 30, 70, 20, 40, 60, 80, the tree looks like:
+       50
+      /  \
+    30    70
+   /  \   /  \
+  20   40 60  80
+
+When deleting 30, it is replaced by 40, resulting in:
+       50
+      /  \
+    40    70
+   /     /  \
+  20    60  80
+
+Why Use Linked List for Tree Nodes?
+
+1. Dynamic Memory Allocation: No need for fixed array size.
+
+2. Efficient Insertions & Deletions: No shifting required.
+
+
+PSEUDOCODE FOR A BINARYTREE USING LINKED LIST WITH ESSENTIAL OPERATIONS:
+
+1. Node Structure
+Node:
+    key
+    left_child
+    right_child
+
+2. Insert a Node
+INSERT(root, key):
+    IF root is NULL:
+        root = CREATE_NEW_NODE(key)
+        RETURN root
+    
+    IF key < root.key:
+        root.left_child = INSERT(root.left_child, key)
+    ELSE IF key > root.key:
+        root.right_child = INSERT(root.right_child, key)
+    
+    RETURN root
+
+3. Search for a Node
+SEARCH(root, key):
+    IF root is NULL OR root.key == key:
+        RETURN root (found or not found)
+
+    IF key < root.key:
+        RETURN SEARCH(root.left_child, key)
+    ELSE:
+        RETURN SEARCH(root.right_child, key)
+
+4. Inorder Traversal (Left → Root → Right)
+INORDER_TRAVERSAL(root):
+    IF root is NOT NULL:
+        INORDER_TRAVERSAL(root.left_child)
+        PRINT root.key
+        INORDER_TRAVERSAL(root.right_child)
+
+5. Preorder Traversal (Root → Left → Right)
+PREORDER_TRAVERSAL(root):
+    IF root is NOT NULL:
+        PRINT root.key
+        PREORDER_TRAVERSAL(root.left_child)
+        PREORDER_TRAVERSAL(root.right_child)
+
+6. Postorder Traversal (Left → Right → Root)
+POSTORDER_TRAVERSAL(root):
+    IF root is NOT NULL:
+        POSTORDER_TRAVERSAL(root.left_child)
+        POSTORDER_TRAVERSAL(root.right_child)
+        PRINT root.key
+
+7. Find Minimum Value Node
+FIND_MIN_NODE(root):
+    WHILE root.left_child is NOT NULL:
+        root = root.left_child
+    RETURN root
+
+8. Delete a Node
+DELETE(root, key):
+    IF root is NULL:
+        RETURN root
+
+    IF key < root.key:
+        root.left_child = DELETE(root.left_child, key)
+    ELSE IF key > root.key:
+        root.right_child = DELETE(root.right_child, key)
+    ELSE:
+        // Case 1: No Child
+        IF root.left_child is NULL AND root.right_child is NULL:
+            root = NULL
+        // Case 2: One Child
+        ELSE IF root.left_child is NULL:
+            root = root.right_child
+        ELSE IF root.right_child is NULL:
+            root = root.left_child
+        // Case 3: Two Children
+        ELSE:
+            temp = FIND_MIN_NODE(root.right_child)
+            root.key = temp.key
+            root.right_child = DELETE(root.right_child, temp.key)
+
+    RETURN root
+
+9. Main Execution
+MAIN():
+    root = NULL
+
+    root = INSERT(root, 50)
+    INSERT(root, 30)
+    INSERT(root, 70)
+    INSERT(root, 20)
+    INSERT(root, 40)
+    INSERT(root, 60)
+    INSERT(root, 80)
+
+    PRINT "Inorder Traversal:"
+    INORDER_TRAVERSAL(root)
+
+    PRINT "Preorder Traversal:"
+    PREORDER_TRAVERSAL(root)
+
+    PRINT "Postorder Traversal:"
+    POSTORDER_TRAVERSAL(root)
+
+    key = 40
+    PRINT "Search " + key + ": " + SEARCH(root, key)
+
+    PRINT "Deleting 30..."
+    root = DELETE(root, 30)
+
+    PRINT "Inorder Traversal After Deletion:"
+    INORDER_TRAVERSAL(root)
+
+Example Execution
+1. Insert nodes: 50, 30, 70, 20, 40, 60, 80
+
+2. Perform Inorder, Preorder, Postorder traversals.
+
+3. Search for node 40.
+
+4. Delete node 30.
+
+5. Perform Inorder traversal after deletion.
